@@ -202,16 +202,17 @@ var CardB = $(".B");
 function pickACard () {
     var classCard = [CardA, CardB]
     var randomCard = Math.floor(Math.random() * classCard.length);
+    
 
 
     if (randomCard === 0) {
-        $('.A').addClass("showCard");
-        $('.B').removeClass("showCard");
+        $('.A').show();
+        $('.B').hide();
         
 }   
     if (randomCard === 1) {
-        $('.B').addClass("showCard");
-        $('.A').removeClass("showCard");
+        $('.A').hide();
+        $('.B').show();
     }
 //   if  ( $("input[name='exampleRadios']:checked").val() === "option1") {
 //       console.log("correct");
@@ -220,9 +221,9 @@ function pickACard () {
 
 //   } else {
 //       updateIndex(player[playerIndex], -1)
-//   }
+  }
 
-}
+
 
 
 //------------------- end cards sections   ----------//
@@ -253,6 +254,7 @@ var player = [
 
 function updateIndex (onePlayer, indexChange) {
     onePlayer.gooseIndex += indexChange;
+    console.log(onePlayer.gooseIndex)
 
     if (onePlayer.gooseIndex >= mixPosition.length) {
         onePlayer.gooseIndex = mixPosition.length - 1;
@@ -278,7 +280,8 @@ drawingLoop()
 var counter = 0;
 
 $(".btn1").click(function(){
-    launchingdie()
+    launchingdie();
+
 });
 
 function drawingLoop() {
@@ -314,17 +317,31 @@ function drawingLoop() {
 }
 //--------------------- dice section -----------//
 
+
+
+var playerIndex;
+$(".form-check-input-1").click(function(){
+  if  ($("#exampleRadios1") || $("#exampleRadios4")) {
+      console.log("This is my playerIndex",playerIndex) ;
+      $(".A").hide();
+      $(".B").hide();
+    //   player[playerIndex].gooseX = player[playerIndex].gooseX + 5;
+  }
+})
+
+
+
 function launchingdie () {
 
         var classes = ["dice1", "dice2", "dice3", "dice4", "dice5", "dice6" ]
         counter += 1 ;
         if(counter % 2 === 0) {
             // console.log("counter");
-            var playerIndex = 1;
+            playerIndex = 1;
 
         } else {
             // console.log("nocounter");
-            var playerIndex = 0;
+            playerIndex = 0;
         }
 
         var randomDice = Math.floor(Math.random()* classes.length)
@@ -342,23 +359,24 @@ function launchingdie () {
                 updateIndex(player[playerIndex], -1);;
                 $(".penality").addClass("penality-showing");
                 $(".penality").html(`<h4>player ${playerIndex + 1} Receives a penality</h4>`);
+                console.log("penality");
             }
             if (mixPosition[player[playerIndex].gooseIndex].specialCard === true) {
+                console.log("nh gbrrvcr")
                 pickACard()
 
+                
+                
+                if  ( $("input[name='exampleRadios']:checked").val() === "option1") {
+                    console.log("correct");
+                    updateIndex(player[playerIndex], +1);
+              
+              
+                } else {
+                    updateIndex(player[playerIndex], -1)
+                }
             }
-            if  ( $("input[name='exampleRadios']:checked").val() === "option1") {
-                console.log("correct");
-                updateIndex(player[playerIndex], +1);
           
-          
-            } else {
-                updateIndex(player[playerIndex], -1)
-            }
-          
-
-            console.log("penality");
-            
             
             // goose2Index += 1;
             $(dadiera).removeClass( "dice2 dice3 dice4 dice5 dice6")
@@ -382,7 +400,7 @@ function launchingdie () {
               
               
                 } else {
-                    updateIndex(player[playerIndex], -1)
+                    updateIndex(player[playerIndex], 0)
                 }
               
 
@@ -410,7 +428,7 @@ function launchingdie () {
               
               
                 } else {
-                    updateIndex(player[playerIndex], -1)
+                    updateIndex(player[playerIndex], 0)
                 }
               
 
@@ -438,7 +456,7 @@ function launchingdie () {
               
               
                 } else {
-                    updateIndex(player[playerIndex], -1)
+                    updateIndex(player[playerIndex], 0)
                 }
               
 
@@ -465,7 +483,7 @@ function launchingdie () {
               
               
                 } else {
-                    updateIndex(player[playerIndex], -1)
+                    updateIndex(player[playerIndex], 0)
                 }
               
 
@@ -494,7 +512,7 @@ function launchingdie () {
           
           
             } else {
-                updateIndex(player[playerIndex], -1)
+                updateIndex(player[playerIndex], 0)
             }
           
 
@@ -540,7 +558,7 @@ console.log(position18);
         // goose2X = mixPosition[goose2Index].x2;
         // goose2Y = mixPosition[goose2Index].y2;
         console.log(player[0]);
-        console.log(player[1]);
+        console.log("this is the CL",player[1]);
 
      
        
